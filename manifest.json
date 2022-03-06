@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "version": "1.0",
+  "name": "Practical Notes",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "416375086af8dc738b089e393d177725.svg"
+  },
+  "permissions": ["tabs"]
+}
