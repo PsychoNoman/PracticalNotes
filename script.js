@@ -1,30 +1,30 @@
-let myLeads = [];
+let myNotes = [];
 const inputEl = document.getElementById("input-el");
 const inputBtn = document.getElementById("input-btn");
 const ulEl = document.getElementById("ul-el");
 const deleteBtn = document.getElementById("delete-btn");
-const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+const notesFromLocalStorage = JSON.parse(localStorage.getItem("myNotes"));
 const tabBtn = document.getElementById("tab-btn");
 
-if (leadsFromLocalStorage) {
-  myLeads = leadsFromLocalStorage;
-  render(myLeads);
+if (notesFromLocalStorage) {
+  myNotes = notesFromLocalStorage;
+  render(myNotes);
 }
 
 tabBtn.addEventListener("click", function () {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    myLeads.push(tabs[0].url);
-    localStorage.setItem("myLeads", JSON.stringify(myLeads));
-    render(myLeads);
+    myNotes.push(tabs[0].url);
+    localStorage.setItem("myNotes", JSON.stringify(myNotes));
+    render(myNotes);
   });
 });
 
-function render(leads) {
+function render(notes) {
   let listItems = "";
-  for (let i = 0; i < leads.length; i++) {
+  for (let i = 0; i < notes.length; i++) {
     listItems += `
             <li>
-                    ${leads[i]}
+                    ${notes[i]}
             </li>
         `;
   }
@@ -33,13 +33,13 @@ function render(leads) {
 
 deleteBtn.addEventListener("click", function () {
   localStorage.clear();
-  myLeads = [];
-  render(myLeads);
+  myNotes = [];
+  render(myNotes);
 });
 
 inputBtn.addEventListener("click", function () {
-  myLeads.push(inputEl.value);
+  myNotes.push(inputEl.value);
   inputEl.value = "";
-  localStorage.setItem("myLeads", JSON.stringify(myLeads));
-  render(myLeads);
+  localStorage.setItem("myNotes", JSON.stringify(myNotes));
+  render(myNotes);
 });
